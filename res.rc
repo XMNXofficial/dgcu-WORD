@@ -1,0 +1,3 @@
+#include "res.h"
+
+IDR_ZIP1                ZIP                     "XMNX.zip"
