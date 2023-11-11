@@ -1,0 +1,6 @@
+[submodule "externalLib/nfd"]
+	path = externalLib/nfd
+	url = https://github.com/XMNXofficial/nativefiledialog-extended
+[submodule "externalLib/hello_imgui"]
+	path = externalLib/hello_imgui
+	url = https://github.com/XMNXofficial/hello_imgui
