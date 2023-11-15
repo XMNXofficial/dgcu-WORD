@@ -103,6 +103,9 @@ APP::APP()
 	p.appWindowParams.windowTitle = "DGCU-WORD";
 	p.appWindowParams.windowGeometry.size = { 800,600 };
 	p.imGuiWindowParams.defaultImGuiWindowType = HelloImGui::DefaultImGuiWindowType::ProvideFullScreenWindow;
+	p.imGuiWindowParams.showStatusBar = true;
+	p.imGuiWindowParams.showStatus_Fps = false;
+	p.imGuiWindowParams.rememberStatusBarSettings = false;
 	p.callbacks.LoadAdditionalFonts = [this]() {
 		ImFontGlyphRangesBuilder a;
 		static ImVector<ImWchar>b;
@@ -110,6 +113,8 @@ APP::APP()
 		a.BuildRanges(&b);
 		gFont = ImGui::GetIO().Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\msyhbd.ttc", 35.0f, nullptr, b.Data); };
 	p.callbacks.ShowGui = mainUI;
+	p.callbacks.ShowStatus = []() {ImGui::Text("免费开源软件\t作者:XMNXofficial\tGithub项目地址:https://github.com/XMNXofficial/dgcu-WORD"); };
+	
 }
 APP::~APP()
 {
