@@ -26,7 +26,6 @@ void APP::mainUI()
 	static int width = 500;
 
 
-
 	static std::string text_name = "作业姓名:";
 	ImGui::SetCursorPosX((ImGui::GetWindowSize().x - ImGui::CalcTextSize(text_name.c_str()).x - width) / 2);
 	ImGui::Text(text_name.c_str());
@@ -56,6 +55,11 @@ void APP::mainUI()
 	ImGui::InputText("##input_作业标题", word_title, sizeof(word_title));
 
 	ImGui::Text("正文:");
+	ImGui::SameLine();
+	ImGui::AlignTextToFramePadding();
+	ImGui::RadioButton("中文", &word_type, 0);
+	ImGui::SameLine();
+	ImGui::RadioButton("英文", &word_type, 1);
 	ImGui::InputTextMultiline("##input_正文", word_buffer, sizeof(word_buffer), ImVec2(ImGui::GetWindowSize().x, ImGui::GetContentRegionAvail().y - 100));
 
 
@@ -64,7 +68,7 @@ void APP::mainUI()
 	{
 		APPcore->release_resource();
 		APPcore->unZipFile(APPcore->OutputZipName);
-		auto result = APPcore->SplitString(word_buffer, 35);
+		auto result = APPcore->SplitString(word_buffer, word_type == 0 ? 35 : 80);
 		std::string MainText = APPcore->GenerateXML_MainText(result);
 		APPcore->GenerateDocument(word_name, word_class, word_schoolID, word_title, MainText);
 
@@ -114,7 +118,7 @@ APP::APP()
 		gFont = ImGui::GetIO().Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\msyhbd.ttc", 35.0f, nullptr, b.Data); };
 	p.callbacks.ShowGui = mainUI;
 	p.callbacks.ShowStatus = []() {ImGui::Text("免费开源软件\t作者:XMNXofficial\tGithub项目地址:https://github.com/XMNXofficial/dgcu-WORD"); };
-	
+
 }
 APP::~APP()
 {
